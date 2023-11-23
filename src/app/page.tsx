@@ -4,7 +4,7 @@ import getServerSession from "next-auth";
 import {auth} from "auth"
 import { redirect } from "next/navigation";
 import { SessionProvider } from "next-auth/react"
-import Main from "@/app/(private)/main/page";
+import Main from "@/app/(private)/main/main";
 
 export default async function Home({
 }) {

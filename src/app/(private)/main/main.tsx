@@ -5,7 +5,8 @@ import type { Session } from "next-auth"
 import {SignOut} from "@/app/components/authComponents"
 
 export default function Main() {
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
+  
   return (
     <div className="space-y-2">
       <h1 className="text-3xl font-bold">Client Side Rendering Usage</h1>
