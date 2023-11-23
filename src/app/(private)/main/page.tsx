@@ -1,19 +1,53 @@
-// import SarangLogo from '@/app/ui/sarang-logo';
-import LoginForm from '@/app/ui/login-form';
-import {MSWProvider} from '@/mocks/MSWProvider';
+"use client"
 
-export default function MainPage() {
+import { useSession } from "next-auth/react"
+import type { Session } from "next-auth"
+import {SignOut} from "@/app/components/authComponents"
+
+export default function Main() {
+  const { data: session, status } = useSession()
   return (
-    // <MSWProvider>
-        <main className="flex items-center justify-center md:h-screen">
-        <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-            <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
-            <div className="w-32 text-white md:w-36">
-                main
-            </div>
-            </div>
-        </div>
-        </main> 
-    // </MSWProvider>
-  );
+    <div className="space-y-2">
+      <h1 className="text-3xl font-bold">Client Side Rendering Usage</h1>
+
+      {status === "loading" ? (
+        <div>Loading...</div>
+      ) : (
+        <SessionData session={session} />
+      )}
+    </div>
+  )
+}
+
+export function SessionData({ session }: { session: Session | null }) {
+  if (session?.user) {
+    return (
+      <div className="w-full space-y-2 overflow-auto">
+        <h2 className="text-xl font-bold">Current Session Data</h2>
+        {Object.keys(session.user).length > 3 ? (
+          <p>
+            In this example, the whole session object is passed to the page,
+            including the raw user object. Our recommendation is to{" "}
+            <em>only pass the necessary fields</em> to the page, as the raw user
+            object may contain sensitive information.
+          </p>
+        ) : (
+          <p>
+            In this example, only some fields in the user object is passed to
+            the page to avoid exposing sensitive information.
+          </p>
+        )}
+        <pre>{JSON.stringify(session, null, 2)}</pre>
+        <SignOut></SignOut>
+      </div>
+    )
+  }else{
+    return (
+      <p>
+        No session data, please <em>Sign In</em> first.
+      </p>
+    )
+
+  }
+
 }

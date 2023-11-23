@@ -2,13 +2,13 @@
  
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
-// import { authenticate } from '@/app/lib/actions';
+import { authenticate } from '@/app/lib/actions';
  
 export default function LoginForm() {
-  // const [code, action] = useFormState(, undefined);
- 
+  const [state, dispatch] = useFormState(authenticate, undefined);
+
   return (
-    <form className="space-y-3">
+    <form action={dispatch}className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8 text-gray-900">
         <h1>
           로그인
@@ -24,9 +24,9 @@ export default function LoginForm() {
             <div className="relative">
               <input
                 className="peer block w-full rounded-md border border-gray-200 py-[12px] px-[17px] text-sm outline-2 placeholder:text-gray-500"
-                id="id"
-                type="id"
-                name="id"
+                id="Username"
+                type="Username"
+                name="username"
                 placeholder="아이디"
                 required
               />
@@ -53,17 +53,19 @@ export default function LoginForm() {
           </div>
         </div>
         <LoginButton />
+        <div className="flex h-8 items-end space-x-1">
+        </div>
       </div>
     </form>
   );
 }
  
 function LoginButton() {
-//   const { pending } = useFormStatus();
+  const { pending } = useFormStatus();
  
   return (
-    <Button className="mt-4 w-full">
-      {/* Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" /> */}
+    <Button className="mt-4 w-full" aria-disabled={pending}>
+      Log In
     </Button>
   );
 }

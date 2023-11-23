@@ -1,22 +1,21 @@
 import Link from "next/link";
+// import {getServerSession} from "next-auth";
+import getServerSession from "next-auth";
+import {auth} from "auth"
+import { redirect } from "next/navigation";
+import { SessionProvider } from "next-auth/react"
+import Main from "@/app/(private)/main/page";
 
-export default function Home() {
+export default async function Home({
+}) {
+  const session = await auth();
+
   return (
-    <main className="flex min-h-screen items-center justify-center">
-        <div className='felx flex-col gap-2 p-5 max-w-xs w-full bg-slate-800 rounded-lg'>
-            <div className="text-center my-4">
-                <h1>UNIV3</h1>
-            </div>
-            <div>
-                <Link href = '/signin' className="bg-slate-900 my-4 p-3 rounded-lg block"
-                >Sing In</Link>
-            </div>
-            <div>
-                <Link href = "/signup"
-                className="bg-slate-900 my-4 p-3 rounded-lg block"
-                >Sing Up</Link>
-            </div>
-        </div>
-    </main>
+    <>
+      <SessionProvider session={session}>
+        <Main></Main>
+      </SessionProvider>
+    </>
+  
   )
 }
