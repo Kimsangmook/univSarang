@@ -1,14 +1,8 @@
 import type { NextAuthConfig } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials'
-// import GitHub from "next-auth/providers/github"
-import GitHubProvider from 'next-auth/providers/github'
  
 export const authConfig = {
   providers: [
-    GitHubProvider({
-      clientId:process.env.GITHUB_ID as string,
-      clientSecret:process.env.GITHUB_SECRET as string,
-    }),
     CredentialsProvider({
       name:"Credentials",
       credentials:{
@@ -24,7 +18,7 @@ export const authConfig = {
           }
       },
       async authorize(credentials) {
-          const user = {id:"42",name:"mook",password:"1234"}
+          const user = {id:"42",name:"mook",email:"uj03109@naver.com",password:"1234"}
           if(credentials?.username === user.name && credentials?.password === user.password){
               console.log("hi");
               return user
@@ -38,19 +32,46 @@ export const authConfig = {
   pages: {
     signIn: '/signin',
   },
+  secret:process.env.NEXTAUTH_SECRET,
+  session:{
+    strategy:'jwt'
+  },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      console.log("asdg");
       const isLoggedIn = !!auth?.user;
+      const isOnMain = nextUrl.pathname.startsWith('/');
 
-      const isOnMain = nextUrl.pathname.startsWith('/attendance');
       if (isOnMain) {
         if (isLoggedIn) return true;
         return false // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(new URL('/attendance', nextUrl));
+        return Response.redirect(new URL('/', nextUrl));
       }
       return true;
     },
+
+    async signIn({ user, account, profile, email, credentials }) {
+      const isAllowedToSignIn = true
+      if (isAllowedToSignIn) {
+        return true
+      } else {
+        // Return false to display a default error message
+        return false
+        // Or you can return a URL to redirect to:
+        // return '/unauthorized'
+    }
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
+    async session({ session, user, token }) {
+      
+      console.log('session callback',{session,user,token});
+      return session
+    },
+    async jwt({ token, user, account, profile, isNewUser,session }) {
+      console.log('jwt callback',{session,user,token});
+      return token
+    }
   },
 } satisfies NextAuthConfig;

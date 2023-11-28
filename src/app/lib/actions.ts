@@ -4,7 +4,6 @@ import {signIn,signOut} from "auth";
 
 export async function authenticate(prevState:string | undefined,formData:FormData) {
     // signIn('credentials',Object.fromEntries(formData));
-    console.log("asdf");
     try{
         await signIn('credentials',Object.fromEntries(formData));
     }catch(error){
@@ -13,6 +12,7 @@ export async function authenticate(prevState:string | undefined,formData:FormDat
         }
         throw error;
     }
+
     
 }
 
