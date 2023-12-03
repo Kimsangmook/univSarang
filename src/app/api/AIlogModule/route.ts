@@ -2,6 +2,6 @@
 import { readFileSync } from "fs";
 
 export async function GET(request:Request) {
-    const body = readFileSync('./AilogModule.js')
+    const body = readFileSync('/src/app/api/AIlogModule/AilogModule')
     return new Response(body,{headers:{'Content-Type':'text/javascript'}});
 }
