@@ -18,7 +18,7 @@ export const authConfig = {
           }
       },
       async authorize(credentials) {
-          const user = {id:"42",name:"mook",email:"uj03109@naver.com",password:"1234"}
+          const user = {id:"42",name:"mook",password:"1234"}
           if(credentials?.username === user.name && credentials?.password === user.password){
               console.log("hi");
               return user
