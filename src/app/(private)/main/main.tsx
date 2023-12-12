@@ -20,7 +20,7 @@ export default function Main() {
 }
 
 export function SessionData({ session }: { session: Session | null }) {
-  console.log('mode', process.env.NEXT_PUBLIC_MODE);
+  // console.log('mode', process.env.NEXT_PUBLIC_MODE);
   if (session?.user) {
     return (
       <div className="w-full space-y-2 overflow-auto">
