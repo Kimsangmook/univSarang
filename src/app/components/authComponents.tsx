@@ -1,4 +1,4 @@
-// 'use server'
+'use server'
 
 import { signIn, signOut } from "auth"
 import { redirect } from "next/navigation"
