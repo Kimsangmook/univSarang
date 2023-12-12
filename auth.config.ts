@@ -20,10 +20,10 @@ export const authConfig = {
       async authorize(credentials) {
           const user = {id:"42",name:"mook",password:"1234"}
           if(credentials?.username === user.name && credentials?.password === user.password){
-              console.log("hi");
+              // console.log("hi");
               return user
           }else{
-              console.log("no");
+              // console.log("no");
               return null
           }
       }   
@@ -66,11 +66,11 @@ export const authConfig = {
     },
     async session({ session, user, token }) {
       
-      console.log('session callback',{session,user,token});
+      // console.log('session callback',{session,user,token});
       return session
     },
     async jwt({ token, user, account, profile, isNewUser,session }) {
-      console.log('jwt callback',{session,user,token});
+      // console.log('jwt callback',{session,user,token});
       return token
     }
   },

@@ -6,7 +6,6 @@ import {SignOut} from "@/app/components/authComponents"
 
 export default function Main() {
   const { data: session, status } = useSession();
-  
   return (
     <div className="space-y-2">
       <h1 className="text-3xl font-bold">Client Side Rendering Usage</h1>
@@ -21,6 +20,7 @@ export default function Main() {
 }
 
 export function SessionData({ session }: { session: Session | null }) {
+  console.log('mode', process.env.NEXT_PUBLIC_MODE);
   if (session?.user) {
     return (
       <div className="w-full space-y-2 overflow-auto">
