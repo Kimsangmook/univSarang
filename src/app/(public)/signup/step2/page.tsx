@@ -1,12 +1,12 @@
 import {InputBirthday,InputName,InputPhoneNumber} from '@/app/components/signupComponents'
 
-export default function Home() {
+export default function SigninStep1() {
     return (
       // <MSWProvider>
       <div className="mx-auto" style={{ width: '350px' }}>
-        {/* <InputBirthday></InputBirthday>
+        <InputBirthday></InputBirthday>
         <InputName></InputName>
-        <PhoneNumber></PhoneNumber> */}
+        <InputPhoneNumber></InputPhoneNumber>
       </div>
       // </MSWProvider>
     );

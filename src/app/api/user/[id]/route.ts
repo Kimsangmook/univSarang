@@ -2,7 +2,6 @@ export async function GET(
     request: Request,
     { params }: { params: { id: string } },
   ) {
-    console.log(params)
   
     const id = String(params.id)
   

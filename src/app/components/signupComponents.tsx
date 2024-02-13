@@ -33,7 +33,7 @@ export function InputBirthday() {
   );
 }
 
-export function PhoneNumber() {
+export function InputPhoneNumber() {
   return (
     <form>
       <h1>전화번호</h1>
@@ -43,6 +43,22 @@ export function PhoneNumber() {
         type="text"
         name="birthday"
         placeholder="'-'없이 숫자만 입력"
+        required
+      />
+    </form>
+  );
+}
+
+export function InputId() {
+  return (
+    <form>
+      <h1>아이디</h1>
+      <input
+        className="peer block w-full rounded-md border border-gray-200 py-[12px] px-[17px] text-sm outline-2 placeholder:text-tc-input-500"
+        id="birthday"
+        type="text"
+        name="birthday"
+        placeholder="아이디"
         required
       />
     </form>
